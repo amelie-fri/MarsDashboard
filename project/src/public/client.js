@@ -201,40 +201,7 @@ function showMars(event, cityName) {
     event.currentTarget.className += "active";
   }
 
-
-
-
-
-// ***********************************************************************************************************
-// or I need to put the eventlistener outside :) 
-// const tab = document.getElementById('zimti');
-// tab.addEventListener('click', showText);
-
-
-// const Content = () => {
-//     const showText = () => {
-//         console.log('hei hei hie hieh hei')
-//     }
- 
-//     // console.log('Heiiiiiiiiiiiiiiiiiiiiiii Markus');
-//     console.log('miepmipemipemiep');
-
-
-    // if (rover === 'Curiosity') {
-        // return `
-        //     <div id="Curiosity" class="tabcontent">
-        //         <h3>Get the rover ${rover}</h3>
-        //         <p>London is the capital city of England.</p>
-        //     </div>
-        // `
-    // }
-
-// }
-
-
-
-
-
+// -----------------------------------------------------------------------------------------------
 
 // Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
 const Greeting = (name) => {
@@ -282,69 +249,13 @@ const latestDate =  (date_curiosity, curiosity, pudding) => {
          getLatestDate(store)
     }
     console.log(pudding);
-    
+
     if (curiosity.photos[pudding].rover.name === "Curiosity") {
         console.log(curiosity.photos[pudding].img_src)
         return  (`
         <img src="${curiosity.photos[pudding].img_src}" "alt="Nature" onclick="myFunction(this);">
         `)
     }
-
-
-// const latestDateOpp =  (date_curiosity, curiosity) => {
-//     if (!date_curiosity && !curiosity) {
-//          getLatestDate(store)
-//     }
-//     if (curiosity.photos[0].rover.name === "Curiosity") {
-//         console.log(curiosity.photos[0].img_src)
-//         return  (`
-//         <img src="${curiosity.photos[0].img_src}" alt="Nature" onclick="myFunction(this);">
-//         `)
-//     }
-
-
-
-    // const latestDate = async (date_curiosity, curiosity) => {
-    //     async function miau(date_curiosity, curiosity) {
-    //         if (!date_curiosity && !curiosity) {
-    //         return prestep = await getLatestDate(store);
-    //         }
-    //     }
-    //     miau().then(() => {
-    //         console.log
-    //     })
-        
-        // return
-        // if (!date_curiosity && !curiosity) {
-        //     const final = await getLatestDate(store);
-        //     console.log(store);
-        //     console.log(store.curiosity.photos[0].img_src);
-        //     return (`<p>${store.curiosity.photos[0].img_src}</p>`)
-        // }
-
-    // async function hello() {
-    //     return greeting = await Promise.resolve("Hello");
-    //   };
-      
-    //   hello().then(alert);
-
-
-    // console.log(curiosity.photos[1].img_src)
-    // return (`<p>${curiosity.photos[1].img_src}</p>`)
-    
-    // console.log(date_curiosity.image.photo_manifest.max_date)
-    // return (`<p>${date_curiosity.image.photo_manifest.max_date}</p>`)
-
-
-}
-// const curiosityIMG = (curiosity) => {
-//     if (!curiosity) {
-//        getCuriosity(store);
-//     }
-//     console.log(curiosity.photos[1].img_src)
-//     return (`<p>${curiosity.photos[1].img_src}</p>`)
-
-// }
 
 // ------------------------------------------------------  API CALLS
 
@@ -359,23 +270,6 @@ const getImageOfTheDay = (state) => {
     // return data
 }
 
-// My API call :) 
-// const json = fetch(`http://localhost:3000/curiosity`)
-// .then((response) => {
-//   return response.json();
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
-
-// API call date :)
-// const json = fetch(`http://localhost:3000/date`)
-// .then((response) => {
-//   return response.json();
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
 
 const getLatestDate = (state) => {
     let { date_curiosity, curiosity } = state
@@ -408,54 +302,3 @@ const getLatestDate = (state) => {
     // return state
 }
 
-// var url = 'https://api.spacexdata.com/v2/launches/latest';
-
-// var result = fetch(url, {
-//     method: 'get',
-//   }).then(function(response) {
-//     return response.json(); // pass the data as promise to next then block
-//   }).then(function(data) {
-//     var rocketId = data.rocket.rocket_id;
-
-//     console.log(rocketId, '\n');
-  
-//     return fetch('https://api.spacexdata.com/v2/rockets/' + rocketId); // make a 2nd request and return a promise
-//   })
-//   .then(function(response) {
-//     return response.json();
-//   })
-//   .catch(function(error) {
-//     console.log('Request failed', error)
-//   })
-
-// // I'm using the result variable to show that you can continue to extend the chain from the returned promise
-// result.then(function(r) {
-//   console.log(r); // 2nd request result
-// });
-
-
-
-// const getCuriosity = async (state) => {
-//     let { curiosity } = state
-
-//     await fetch(`http://localhost:3000/curiosity`)
-//         .then(res => res.json())
-//         .then(curiosity => updateStore(store, { curiosity }))
-
-
-//     // return data
-// }
-
-// const getCuriosity = async (state) => {
-//     const input = "2021-01-11"
-//     // const input = "2021-01-11"
-//     // const input = state.date_curiosity
-//     let { curiosity } = state
-
-//     await fetch(`http://localhost:3000/curiosity/${input}`)
-//         .then(res => res.json())
-//         .then(curiosity => updateStore(store, { curiosity }))
-
-
-//     // return data
-// }
