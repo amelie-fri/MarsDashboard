@@ -14,22 +14,6 @@ app.use(express.json())
 
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-// could possibly be correct as well :)
-// app.use('/', express.static(__dirname + '../public'));
-
-
-// new API call
-// app.get('/snickers', async (req, res) => {
-//     // res.send('heiiiiiiiiiiiiiiiii');
-//     try {
-//         // let image = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`)
-//         let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=${process.env.API_KEY}`)
-//             .then(res => res.json())
-//         res.send({ image })
-//     } catch (err) {
-//         console.log('error:', err);
-//     }
-// })
 
 
 // example API call
@@ -46,6 +30,7 @@ app.get('/apod', async (req, res) => {
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 // API call to obtain the date of the latest rover pictures
+
 app.get('/date_curiosity', async (req, res) => {
     try {
         let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/manifests/Curiosity/?api_key=${process.env.API_KEY}`)
@@ -58,11 +43,8 @@ app.get('/date_curiosity', async (req, res) => {
 })
 
 
+// API calls regarding the data for the Rovers
 
-// Trying something new here :)
-// First:
-// get the max_date - to figure out when the most recent photos were taken
-// 
 app.get("/curiosity/:date", async (request, response) => {
     // Fetch from NASA
     const date = request.params.date;
@@ -89,14 +71,3 @@ app.get("/spirit", async (request, response) => {
     const capri = await fetch_response.json();
     return capri;
 }
-//     const json = await fetch_response.json();
-//     return json;
-//   }
-
-
-app.get("/munch/malerier/:tekst", async (request, response) => {
-    const tekst = request.params.tekst;
-    // Fetch from munchmuseet.no
-    const json = await munchEndpoints(tekst, "5026-Malerier");
-    response.json(json);
-  });

@@ -24,20 +24,7 @@ const render = async (root, state) => {
     root.innerHTML = App(state)
 }
 
-// ${latestDate(date_curiosity)} what i removed under rovers :) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // ${curiosityIMG(curiosity)}
 
-            //     <div id="Curiosity" class="tabcontent">
-            //     <h3>Curiosity</h3>
-            //     <p>London is the capital city of England.</p>
-            // </div>
-
-
-
-// recently removed: 
-//<button class="tablinks" onclick="openCity(event, 'Curiosity')">Curiosity</button>
-// create content
-// actually used showMars
 // App function defined to return all content for page when called :)
 const App = (state) => {
     let { rovers, apod, date_curiosity, curiosity, rover } = state
@@ -47,7 +34,7 @@ const App = (state) => {
         <main>
             ${Greeting(store.user.name)}
             <section>
-            <!-- Tab content -->
+            <!-- Tab Links -->
             <div class="tab">
                 <button id="curiositylink "class="tablinks" onclick="showMars(event, 'Curiosity')">Curiosity</button>
                 <button id="opportunitylink" class="tablinks" onclick="showMars(event, 'Opportunity')">Opportunity</button>
@@ -55,10 +42,11 @@ const App = (state) => {
             </div>
 
             <!-- Tab content -->
-            
+            <!-- The Curiosity Tab -->
+
             <div id="Curiosity" class="tabcontent">
                 <h3>Curiosity</h3>
-                <p>London is the capital city of England.</p>
+                ${ExtraInformation(date_curiosity)}
                 <!-- The grid: four columns -->
                 <div class="row">
                     <div class="column">
@@ -92,15 +80,80 @@ const App = (state) => {
                 </div>
             </div>
 
+            <!-- The Opportunity Tab -->
+
             <div id="Opportunity" class="tabcontent">
-                <h3>Paris</h3>
-                <p>Paris is the capital of France.</p>
+                <h3>Opportunity</h3>
+                <!-- The grid: four columns -->
+                <div class="row">
+                    <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 0)}
+                    <img src="img_nature.jpg" "alt="Nature" onclick="myFunction(this);">
+                    </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 1)}
+                    <img src="img_snow.jpg" alt="Snow" onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 2)}
+                    <img src="img_mountains.jpg" alt="Mountains" onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 3)}
+                    <img src="img_lights.jpg" alt="Lights" onclick="myFunction(this);">
+                </div>
+                </div>
+
+                <!-- The expanding image container -->
+                <div class="container">
+                <!-- Close the image -->
+                <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                <!-- Expanded image -->
+                <img id="expandedImg" style="width:100%">
+
+                <!-- Image text -->
+                <div id="imgtext"></div>
+                </div>
             </div>
 
+            <!-- The Spirit Tab -->
+
             <div id="Spirit" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
+                <h3>Spirit</h3>
+                <!-- The grid: four columns -->
+                <div class="row">
+                    <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 0)}
+                    <img src="img_nature.jpg" "alt="Nature" onclick="myFunction(this);">
+                    </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 1)}
+                    <img src="img_snow.jpg" alt="Snow" onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 2)}
+                    <img src="img_mountains.jpg" alt="Mountains" onclick="myFunction(this);">
+                </div>
+                <div class="column">
+                    ${latestDate(date_curiosity, curiosity, 3)}
+                    <img src="img_lights.jpg" alt="Lights" onclick="myFunction(this);">
+                </div>
+                </div>
+
+                <!-- The expanding image container -->
+                <div class="container">
+                <!-- Close the image -->
+                <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+                <!-- Expanded image -->
+                <img id="expandedImg" style="width:100%">
+
+                <!-- Image text -->
+                <div id="imgtext"></div>
+                </div>
             </div>
+
                 <p>Curious about the latest pictures from Mars?</p>
                 <p>Pick one of the Mars Rovers</p>
                 <p>
@@ -120,6 +173,24 @@ window.addEventListener('load', () => {
 
 
 // ------------------------------------------------------  COMPONENTS
+
+const ExtraInformation = (date_curiosity) => {
+    if (!date_curiosity) {
+        getLatestDate(store)
+   }
+
+   if (date_curiosity.image.photo_manifest.name === "Curiosity") {
+       console.log(date_curiosity.image.photo_manifest.landing_date)
+       return  (`
+
+       <p>Launch date: ${date_curiosity.image.photo_manifest.launch_date}</p>
+       <p>Landing date: ${date_curiosity.image.photo_manifest.landing_date}</p>
+       <p>Status: ${date_curiosity.image.photo_manifest.status}</p>
+       <p>Latest photos: ${date_curiosity.image.photo_manifest.max_date}</p>
+
+       `)
+   }
+}
 
 const CuriosImage = () => {
 
@@ -256,7 +327,7 @@ const latestDate =  (date_curiosity, curiosity, pudding) => {
         <img src="${curiosity.photos[pudding].img_src}" "alt="Nature" onclick="myFunction(this);">
         `)
     }
-
+}
 // ------------------------------------------------------  API CALLS
 
 // Example API call
