@@ -1,14 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+
 /* -------------------  MOBILE  --------------------- */
 
 body {
   display: flex;
   flex-direction: column;
-  font-family: Arial;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
   min-height: 100vh;
 }
 
 header {
-  /* header styles */
+  font-family: "Dancing Script", cursive;
+  font-size: 60px;
 }
 
 main {
@@ -50,6 +56,9 @@ main {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
 }
 
 /* Style for the Gallery */
@@ -89,7 +98,7 @@ main {
   position: absolute;
   bottom: 15px;
   left: 15px;
-  color: white;
+  color: pink;
   font-size: 20px;
 }
 

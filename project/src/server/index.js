@@ -2,6 +2,7 @@ require('dotenv').config()
 const { json } = require('body-parser')
 const { response } = require('express')
 const express = require('express')
+const { Map, List } = require('immutable');
 // const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const path = require('path')
@@ -41,6 +42,28 @@ app.get('/date_curiosity', async (req, res) => {
         console.log('error:', err);
     }
 })
+app.get('/date_opportunity', async (req, res) => {
+    try {
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/manifests/Opportunity/?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())
+        console.log(image);
+        res.send({ image })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+app.get('/date_spirit', async (req, res) => {
+    try {
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/manifests/Spirit/?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())
+        console.log(image);
+        res.send({ image })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+
 
 
 // API calls regarding the data for the Rovers
@@ -53,15 +76,17 @@ app.get("/curiosity/:date", async (request, response) => {
     response.json(data);
   });
 
-app.get("/opportunity", async (request, response) => {
+app.get("/opportunity/:date", async (request, response) => {
     // Fetch from NASA
-    const data = await marsRovers("opportunity", "2021-01-12");
+    const date = request.params.date;
+    const data = await marsRovers("opportunity", date);
     response.json(data);
 });
 
-app.get("/spirit", async (request, response) => {
+app.get("/spirit/:date", async (request, response) => {
     // Fetch from NASA
-    const data = await marsRovers("spirit", "2021-01-12");
+    const date = request.params.date;
+    const data = await marsRovers("spirit", date);
     response.json(data);
 });
 
@@ -71,3 +96,6 @@ app.get("/spirit", async (request, response) => {
     const capri = await fetch_response.json();
     return capri;
 }
+
+
+
